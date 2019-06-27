@@ -1,3 +1,36 @@
+## Description
+The main goal of this assignment is to create a small project called GithubClient. It is a single page
+application where users see a list of Github users that own repositories written in Javascript language,
+and see details about those users and their repositories. All data should be taken from the Github public API.
+
+Project styling is done with a CSS preprocessor like SASS or a CSS-In-JS library like styled-components. All data could be retrieved directly from the Github public API with simple ajax calls from the client.
+
+## Basic level
+On top of each page, there is a navigation menu with links to Github Users, Following .
+On Github Users page, users of the application is seeing a list of Github users (not organizations) that
+own repositories written in Javascript language, sorted by most followers of user. Github users should be
+presented with the following details about them:
+ - Avatar (an image element with user avatar)
+ - Name
+ - Login Name
+ - Location
+ - Number of public repositories
+ - Number of public gists
+ - Number of followers
+ - Number of following users
+
+The list have a very simple pagination with just a Previous and Next buttons. The number of Github users per page is up to the developers.
+
+The users of the application can click on Github users in order to get more details about repositories they own, sorted by most recently updated. A more detailed view (preferable an expanded view, a modal or another page) should be presented with the following details about their repositories:
+ - Full Name
+ - Description
+ - License Name
+ - Number of stars
+ - Number of watchers
+ - Number of forks
+ 
+The list should have a very simple pagination with just a Previous and Next buttons.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -40,29 +73,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
