@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Navbar from "./components/Navbar";
 //import Divider from "./components/Divider";
 //import Footer from "./components/Footer";
-import BulmaComponeTry from "./components/BulmaComponeTry";
+//import BulmaComponeTry from "./components/BulmaComponeTry";
 import './App.scss';
 
 //import { BrowserRouter, Route } from "react-router-dom";
@@ -29,7 +29,7 @@ class App extends Component {
       this.state = {
         users: [],
         repos: [],
-        user: {},
+        usersDetails: [],
         userPage: 1,
         repoPage: 1,
       };
@@ -42,10 +42,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getUserDetails('yyx990803');
+    //this.getUserDetails('yyx990803');
     //console.log(this.state.users[0]);
     
-    this.getUserRepos('yyx990803');
+    //this.getUserRepos('yyx990803');
     //console.log(this.state.repos);
 
   };
@@ -79,12 +79,12 @@ class App extends Component {
    * and return data with details of the user from github profile
    * @todo try to use ghUser=this.state.user.login as this param for user initialization 
    */
-  getUserDetails = function (ghUser) {
+  getUsersDetails = function (ghUser) {
 
     axios.get(`${API}/users/${ghUser}`)
       .then( (response) => {
         //console.log(response.data);
-        this.setState({user: response.data});
+        this.setState({usersDetails: response.data});
         //console.log(this.state.user.login);
       }).catch( (error) => {
         console.error("Error on fetching Github user data:" + error);
@@ -104,11 +104,14 @@ class App extends Component {
       .then( (response) => {
         //console.log(response.data);
         this.setState({repos: response.data})
-      } )
+      }).catch( (error) => {
+        console.error("Error on fetching Github repos data:" + error);
+        window.alert("Sorry, there is a malfunction on fetching Github user repos!");
+      })
   }
 
   render() {
-    //console.log(this.state.users);
+    console.log(this.state.users);
 
     return (
       <React.Fragment>
@@ -119,12 +122,9 @@ class App extends Component {
         logoHeight={28}
         />
 
-        <GithubUsers />
+        <GithubUsers users={this.state.users} getUserDetails={this.getUserDetails} />
         <Following />
 
-        <BulmaComponeTry />
-        <BulmaComponeTry />
-        <BulmaComponeTry />
       </React.Fragment>
     );
   }
