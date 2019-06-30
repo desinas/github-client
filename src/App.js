@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Navbar from "./components/Navbar";
 //import Divider from "./components/Divider";
 //import Footer from "./components/Footer";
+import BulmaComponeTry from "./components/BulmaComponeTry";
 import './App.scss';
 
 //import { BrowserRouter, Route } from "react-router-dom";
@@ -121,6 +122,9 @@ class App extends Component {
         <GithubUsers />
         <Following />
 
+        <BulmaComponeTry />
+        <BulmaComponeTry />
+        <BulmaComponeTry />
       </React.Fragment>
     );
   }
