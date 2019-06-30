@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import './App.scss';
 
 //import { BrowserRouter, Route } from "react-router-dom";
-import GithubUsers from './GithubUsers';
+import GithubUser from './GithubUser';
 import Following from './Following';
 
 import axios from 'axios';
@@ -29,10 +29,11 @@ class App extends Component {
       this.state = {
         users: [],
         repos: [],
-        usersDetails: [],
+
         userPage: 1,
         repoPage: 1,
-      };
+      }
+      
   }
 
   componentWillMount() {
@@ -43,7 +44,7 @@ class App extends Component {
 
   componentDidMount() {
     //this.getUserDetails('yyx990803');
-    //console.log(this.state.users[0]);
+    //console.log(this.state.userDetails);
     
     //this.getUserRepos('yyx990803');
     //console.log(this.state.repos);
@@ -64,33 +65,15 @@ class App extends Component {
     const find = '/search/users';
     axios.get(`${API}${find}?q=language:javascript+type:user&sort=followers&order=desc&page=${userPage}&per_page=10`)
       .then( (response) => {
-        //console.log(response.data.items)
-        this.setState({users: response.data.items});
+        //console.dir(response.data.items[0].login)
+        this.setState({users: response.data.items}); //this.state.users.map((user) => ({'login':user.login})); console.log(this.state.users);
       }).catch( (error) => {
         console.error("Error on fetching Github users:" + error);
         window.alert("Sorry, there is a malfunction on fetching Github Javascripters!");
       })
   }
 
-  /**
-   * @function getUserDetails use axios library in order to call the api and return a promise on resolve
-   * @todo manage to chain this function with the the getUserRepos so that to have user repos data ready
-   * @param {string} ghUser is passed to the function to make an api call to github at the users endpoint
-   * and return data with details of the user from github profile
-   * @todo try to use ghUser=this.state.user.login as this param for user initialization 
-   */
-  getUsersDetails = function (ghUser) {
 
-    axios.get(`${API}/users/${ghUser}`)
-      .then( (response) => {
-        //console.log(response.data);
-        this.setState({usersDetails: response.data});
-        //console.log(this.state.user.login);
-      }).catch( (error) => {
-        console.error("Error on fetching Github user data:" + error);
-        window.alert("Sorry, there is a malfunction on fetching Github user details!");
-      })
-  }
 
     /**
    * @function getUserRepos use axios library in order to call the api and return a promise on resolve
@@ -111,7 +94,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.users);
+    //console.log(this.state.users);
 
     return (
       <React.Fragment>
@@ -122,7 +105,12 @@ class App extends Component {
         logoHeight={28}
         />
 
-        <GithubUsers users={this.state.users} getUserDetails={this.getUserDetails} />
+ { this.state.users
+     .map(( user ) => ({ 'avatar_url' :  user.avatar_url,                
+                         'id' : user.id,
+                         'login' : user.login }) ).map(( user ) => ( <GithubUser {...user} key={user.id} /> )) }
+
+      
         <Following />
 
       </React.Fragment>
