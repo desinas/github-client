@@ -1,0 +1,77 @@
+.FooterComponent {
+  padding: 4rem 1.5rem;
+  background-color: #172C60;
+  color: #919EB7;
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    > div {
+      display: flex;
+      flex: none;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+
+  a {
+    color: inherit;
+    &:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+  }
+
+  .brand {
+    img {
+      display: block;
+      height: 32px;
+    }
+  }
+
+  .social {
+    align-items: flex-end;
+    a {
+      color: #ffffff;
+      &:hover {
+        text-decoration: none;
+      }
+      &:not(:first-of-type) {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .links {
+    a:not(:first-of-type) {
+      margin-left: 20px;
+    }
+  }
+
+  .copyright {
+  }
+
+  // Tablet and up
+  @media screen and (min-width: 769px) {
+    .container {
+      > div {
+        flex: 50%;
+      }
+
+      .left {
+        justify-content: flex-start;
+      }
+
+      .right {
+        justify-content: flex-end;
+      }
+    }
+
+    // Move links to end (bottom right)
+    // Swaps position with social
+    .links {
+      order: 1;
+    }
+  }
+}

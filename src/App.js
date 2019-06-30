@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
+import Navbar from "./components/Navbar";
+//import Divider from "./components/Divider";
+//import Footer from "./components/Footer";
 import './App.scss';
+
+//import { BrowserRouter, Route } from "react-router-dom";
+import GithubUsers from './GithubUsers';
+import Following from './Following';
 
 import axios from 'axios';
 import { API } from './defaults';
 
+/**
+ * @description this is the main component of the react structure and includes the state of the app
+ * in a particular time and logic of the app in terms of functions that performs the data fetching
+ */
 class App extends Component {
   constructor(props) {
     super(props);
@@ -99,22 +110,18 @@ class App extends Component {
     //console.log(this.state.users);
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <React.Fragment>
+        <Navbar
+        spaced={true}
+        logo="https://bulma.io/images/bulma-logo.png"
+        logoWidth={112}
+        logoHeight={28}
+        />
+
+        <GithubUsers />
+        <Following />
+
+      </React.Fragment>
     );
   }
 }
