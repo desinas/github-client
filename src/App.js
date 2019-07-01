@@ -42,15 +42,6 @@ class App extends Component {
     
   };
 
-  componentDidMount() {
-    //this.getUserDetails('yyx990803');
-    //console.log(this.state.userDetails);
-    
-    //this.getUserRepos('yyx990803');
-    //console.log(this.state.repos);
-
-  };
-  
   /**
  * @description Github API call with query params in it to fetch users Javascripters
  * from the Github with popularity as a base factor according the number of followers.
@@ -72,8 +63,6 @@ class App extends Component {
         window.alert("Sorry, there is a malfunction on fetching Github Javascripters!");
       })
   }
-
-
 
     /**
    * @function getUserRepos use axios library in order to call the api and return a promise on resolve
@@ -105,14 +94,13 @@ class App extends Component {
         logoHeight={28}
         />
 
- { this.state.users
-     .map(( user ) => ({ 'avatar_url' :  user.avatar_url,                
-                         'id' : user.id,
-                         'login' : user.login }) ).map(( user ) => ( <GithubUser {...user} key={user.id} /> )) }
+        { this.state.users
+            .map(( user ) => ({ 'avatar_url' :  user.avatar_url,                
+                                'id' : user.id,
+                                'login' : user.login }) )
+                                  .map(( user ) => ( <GithubUser {...user} key={user.id} /> )) }
 
-      
         <Following />
-
       </React.Fragment>
     );
   }

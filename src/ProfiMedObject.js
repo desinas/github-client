@@ -13,9 +13,12 @@ function ProfiMedObject(props) {
         <div className="media-content">
             <div className="content">
             <p>
-                <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                <strong>{props.name}</strong> <small>@{props.login}</small> 🚦 <small>{props.location}</small>
                 <br />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                <strong> Public Repositories: {props.public_repos} 🛢 </strong>
+                <small> Public Gists: {props.public_gists} 💎 </small>
+                <strong> Followers: {props.followers} 🔮 </strong>
+                <small> Following: {props.following} 💈 </small>
             </p>
             </div>
             <nav className="level is-mobile">
