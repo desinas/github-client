@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ProfiMedObject from './ProfiMedObject';
+import Tiles from "./components/Tiles";
 
 import axios from 'axios';
-import { API } from './defaults';
+import { API, REPO_PER_PG } from './defaults';
 
 /**
  * 
@@ -50,6 +51,7 @@ class GithubUser extends Component {
                     public_gists={this.state.userDetails.public_gists}
                     public_repos={this.state.userDetails.public_repos} location={this.state.userDetails.location} />
 
+                
             </React.Fragment>
         )
 }}

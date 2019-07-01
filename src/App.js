@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 import Navbar from "./components/Navbar";
+import Pagination from "./components/Pagination";
 //import Divider from "./components/Divider";
 //import Footer from "./components/Footer";
 //import BulmaComponeTry from "./components/BulmaComponeTry";
@@ -11,7 +12,7 @@ import GithubUser from './GithubUser';
 import Following from './Following';
 
 import axios from 'axios';
-import { API } from './defaults';
+import { API, USER_PER_PG } from './defaults';
 
 /**
  * @description this is the main component of the react structure and includes the state of the app
@@ -54,7 +55,7 @@ class App extends Component {
   searchUsers = function (userPage=this.state.userPage) {
     
     const find = '/search/users';
-    axios.get(`${API}${find}?q=language:javascript+type:user&sort=followers&order=desc&page=${userPage}&per_page=10`)
+    axios.get(`${API}${find}?q=language:javascript+type:user&sort=followers&order=desc&page=${userPage}&per_page=${USER_PER_PG}`)
       .then( (response) => {
         //console.dir(response.data.items[0].login)
         this.setState({users: response.data.items}); //this.state.users.map((user) => ({'login':user.login})); console.log(this.state.users);
@@ -99,6 +100,8 @@ class App extends Component {
                                 'id' : user.id,
                                 'login' : user.login }) )
                                   .map(( user ) => ( <GithubUser {...user} key={user.id} /> )) }
+
+        <Pagination />
 
         <Following />
       </React.Fragment>
