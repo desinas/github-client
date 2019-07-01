@@ -3,7 +3,11 @@ The main goal of this assignment is to create a small project called GithubClien
 application where users see a list of Github users that own repositories written in Javascript language,
 and see details about those users and their repositories. All data should be taken from the Github public API.
 
+![Screenshot](/img/Screenshot%202019-07-01%20at%2008.51.11.png)
+
 Project styling is done with a CSS preprocessor like SASS or a CSS-In-JS library like styled-components. All data could be retrieved directly from the Github public API with simple ajax calls from the client.
+
+![Screenshot](/img/Screenshot%202019-07-01%20at%2008.51.35.png)
 
 ## Basic level
 On top of each page, there is a navigation menu with links to Github Users, Following .
@@ -20,6 +24,8 @@ presented with the following details about them:
  - Number of following users
 
 The list have a very simple pagination with just a Previous and Next buttons. The number of Github users per page is up to the developers.
+
+![Screenshot](/img/Screenshot%202019-07-01%20at%2008.49.40.png)
 
 The users of the application can click on Github users in order to get more details about repositories they own, sorted by most recently updated. A more detailed view (preferable an expanded view, a modal or another page) should be presented with the following details about their repositories:
  - Full Name
