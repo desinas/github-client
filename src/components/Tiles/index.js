@@ -21,7 +21,7 @@ function Tiles(props) {
                     <p className="title">Middle tile</p>
                     <p className="subtitle">With an image</p>
                     <figure className="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/640x480.png" />
+                        <img src="https://bulma.io/images/placeholders/640x480.png" alt="" />
                     </figure>
                     </article>
                 </div>

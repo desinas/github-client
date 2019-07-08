@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ProfiMedObject from './ProfiMedObject';
-import Tiles from "./components/Tiles";
+import RepoTile from "./RepoTile";
+//import Pagination from "./components/Pagination";
 
 import axios from 'axios';
 import { API, REPO_PER_PG } from './defaults';
@@ -9,19 +10,32 @@ import { API, REPO_PER_PG } from './defaults';
  * 
  * @param {*} props 
  */
-class GithubUser extends Component {
+class GithubUser extends React.Component {
     constructor(props) {
-        super(props);
-        this.state = {
-            userDetails: {}
-        }
-    };
+          super(props);
 
-    componentWillMount() {
-        this.getUserDetails(this.props.login) 
+        this.state = { 
+            userDetails: {
+                name: "Github Username",
+                location: "Somewhere in Earth",
+                followers: 0,
+                following: 0,
+                public_gists: 0,
+                public_repos: 0
+            },
+            isProfiClicked: false,
+            repos: [],
+            repoPage: 1
+        };
     }
 
-        /**
+    componentDidMount() {
+
+        this.getUserDetails(this.props.login);
+        this.getUserRepos(this.props.login, this.state.repoPage);
+    }
+
+     /**
      * @function getUserDetails use axios library in order to call the api and return a promise on resolve
      * @todo manage to chain this function with the the getUserRepos so that to have user repos data ready
      * @param {string} ghUser is passed to the function to make an api call to github at the users endpoint
@@ -41,6 +55,25 @@ class GithubUser extends Component {
         })
     }
 
+     /**
+     * @function getUserRepos use axios library in order to call the api and return a promise on resolve
+     * @param {string} ghUser is passed to the function to make an api call to github at the users endpoint
+     * and return data for repositories that associated with this github user
+     * @example https://api.github.com/users/yyx990803/repos?sort=updated&type=owner&direction=%20desc&page=1&per_page=10
+     */
+    getUserRepos = function (ghUser, repoPage=this.state.repoPage) {
+
+        axios.get(`${API}/users/${ghUser}/repos?sort=updated&type=owner&direction=%20desc&page=${repoPage}&per_page=${REPO_PER_PG}`)
+        .then( (response) => {
+            //console.log(response.data);
+            this.setState({repos: response.data});
+            console.log(this.state.repos);
+        }).catch( (error) => {
+            console.error("Error on fetching Github repos data:" + error);
+            window.alert("Sorry, there is a malfunction on fetching Github user repos!");
+        })
+    }
+
     render() {
         return(
             
@@ -51,12 +84,22 @@ class GithubUser extends Component {
                     public_gists={this.state.userDetails.public_gists}
                     public_repos={this.state.userDetails.public_repos} location={this.state.userDetails.location} />
 
-                
+                { this.state.isProfiClicked && this.state.repos
+                        .map(( repo ) => ({ 'id' : repo.id,
+                                            'name' : repo.name,
+                                            'description' : repo.description,
+                                            'license' : repo.license,
+                                            'stargazers_count' : repo.stargazers_count,
+                                            'watchers' : repo.watchers,
+                                            'forks_count' : repo.forks_count }) )
+                                            .map(( repo ) => ( <RepoTile {...repo} key={repo.id} /> )) }
+
             </React.Fragment>
         )
 }}
 
 export default GithubUser;
+
 
 // { props.users
 //     .map(( user ) => ({ 'avatar_url' :  user.avatar_url,

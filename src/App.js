@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 //import logo from './logo.svg';
 import Navbar from "./components/Navbar";
 import Pagination from "./components/Pagination";
@@ -18,7 +18,7 @@ import { API, USER_PER_PG } from './defaults';
  * @description this is the main component of the react structure and includes the state of the app
  * in a particular time and logic of the app in terms of functions that performs the data fetching
  */
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,10 +29,7 @@ class App extends Component {
     */
       this.state = {
         users: [],
-        repos: [],
-
-        userPage: 1,
-        repoPage: 1,
+        userPage: 1
       }
       
   }
@@ -62,24 +59,6 @@ class App extends Component {
       }).catch( (error) => {
         console.error("Error on fetching Github users:" + error);
         window.alert("Sorry, there is a malfunction on fetching Github Javascripters!");
-      })
-  }
-
-    /**
-   * @function getUserRepos use axios library in order to call the api and return a promise on resolve
-   * @param {string} ghUser is passed to the function to make an api call to github at the users endpoint
-   * and return data for repositories that associated with this github user
-   * @example https://api.github.com/users/yyx990803/repos?sort=updated&type=owner&direction=%20desc&page=1&per_page=10
-   */
-  getUserRepos = function (ghUser, repoPage=this.state.repoPage) {
-
-    axios.get(`${API}/users/${ghUser}/repos?sort=updated&type=owner&direction=%20desc&page=${repoPage}&per_page=10`)
-      .then( (response) => {
-        //console.log(response.data);
-        this.setState({repos: response.data})
-      }).catch( (error) => {
-        console.error("Error on fetching Github repos data:" + error);
-        window.alert("Sorry, there is a malfunction on fetching Github user repos!");
       })
   }
 

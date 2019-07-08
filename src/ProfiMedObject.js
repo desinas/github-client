@@ -23,13 +23,13 @@ function ProfiMedObject(props) {
             </div>
             <nav className="level is-mobile">
             <div className="level-left">
-                <a href="#" className="level-item">
+                <a href="/" className="level-item">
                 <span className="icon is-small"><i className="fas fa-reply"></i></span>
                 </a>
-                <a href="#" className="level-item">
+                <a href="/" className="level-item">
                 <span className="icon is-small"><i className="fas fa-retweet"></i></span>
                 </a>
-                <a href="#" className="level-item">
+                <a href="/" className="level-item">
                 <span className="icon is-small"><i className="fas fa-heart"></i></span>
                 </a>
             </div>
@@ -45,3 +45,7 @@ function ProfiMedObject(props) {
 }
 
 export default ProfiMedObject;
+
+
+//onClick = { () => {props.handleClick()}
+//onClick={() => alert("Hello from here")} //this in the attr of the main elem of component will bind the event

@@ -18,7 +18,7 @@ function Navbar(props) {
           </a>
           <a className="navbar-item" href="/">Github Users</a>
           <a className="navbar-item" href="/following">Following</a>
-          <a href="#" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a href="/" role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
