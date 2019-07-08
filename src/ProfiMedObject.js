@@ -4,7 +4,7 @@ function ProfiMedObject(props) {
     return(
         <section className="section">
 
-        <article className="media">
+        <article className="media" onClick={() => {props.handleClick()}} >
         <figure className="media-left">
             <p className="image is-64x64">
             <img src={props.avatar_url} alt="Github user avatar" />

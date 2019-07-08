@@ -27,6 +27,7 @@ class GithubUser extends React.Component {
             repos: [],
             repoPage: 1
         };
+        this.handleClick=this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -34,6 +35,11 @@ class GithubUser extends React.Component {
         this.getUserDetails(this.props.login);
         this.getUserRepos(this.props.login, this.state.repoPage);
     }
+
+    handleClick () {
+        
+        this.setState( {isProfiClicked: !this.state.isProfiClicked} )
+    };
 
      /**
      * @function getUserDetails use axios library in order to call the api and return a promise on resolve
@@ -81,7 +87,7 @@ class GithubUser extends React.Component {
                 <ProfiMedObject key={this.props.id} login={this.props.login}
                     name={this.state.userDetails.name} avatar_url={this.props.avatar_url}
                     followers={this.state.userDetails.followers} following={this.state.userDetails.following}
-                    public_gists={this.state.userDetails.public_gists}
+                    public_gists={this.state.userDetails.public_gists} handleClick={this.handleClick}
                     public_repos={this.state.userDetails.public_repos} location={this.state.userDetails.location} />
 
                 { this.state.isProfiClicked && this.state.repos
