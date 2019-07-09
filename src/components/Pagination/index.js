@@ -8,13 +8,13 @@ function Pagination(props) {
             <a href="/" className="pagination-next">Next page</a>
             <ul className="pagination-list">
                 <li>
-                <a href="/" className="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
+                <button id="1" onClick={props.handlePageClick} className="pagination-link" aria-label="Page 1" aria-current="page">1</button>
                 </li>
                 <li>
-                <a href="/" className="pagination-link" aria-label="Goto page 2">2</a>
+                <button id="2" onClick={props.handlePageClick} className="pagination-link" aria-label="Goto page 2">2</button>
                 </li>
                 <li>
-                <a href="/" className="pagination-link" aria-label="Goto page 3">3</a>
+                <button id="3" onClick={props.handlePageClick} className="pagination-link" aria-label="Goto page 3">3</button>
                 </li>
             </ul>
             </nav>

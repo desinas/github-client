@@ -19,26 +19,33 @@ import { API, USER_PER_PG } from './defaults';
  * in a particular time and logic of the app in terms of functions that performs the data fetching
  */
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     /** 
      * @description state of the app is used to keep the current page with the list of users fetched
      * @param {string} users is the JSON data in a array the promise returns
      * @param {number} userPage is the number for pagination, init value 1 for the first page
     */
-      this.state = {
-        users: [],
-        userPage: 1
-      }
-      
+    this.state = {
+      users: [],
+      userPage: null
+    };
+    this.handlePageClick=this.handlePageClick.bind(this);
   }
 
   componentWillMount() {
+
     this.searchUsers();
     //console.log(this.state.users)
     
-  };
+  }
+
+  handlePageClick (event) {
+
+    this.setState({userPage: Number(event.target.id)});
+    this.searchUsers( Number(event.target.id) );
+  }
 
   /**
  * @description Github API call with query params in it to fetch users Javascripters
@@ -49,8 +56,9 @@ class App extends React.Component {
  * to the function explicitly, use the setState to change page instead
  * @example https://api.github.com/search/users?q=language:javascript+type:user&sort=followers&order=desc&page=1&per_page=10
  */
-  searchUsers = function (userPage=this.state.userPage) {
+  searchUsers = function (userPage) {
     
+    if (userPage === null) {userPage=1} //init of user page at number 1
     const find = '/search/users';
     axios.get(`${API}${find}?q=language:javascript+type:user&sort=followers&order=desc&page=${userPage}&per_page=${USER_PER_PG}`)
       .then( (response) => {
@@ -80,7 +88,7 @@ class App extends React.Component {
                                 'login' : user.login }) )
                                   .map(( user ) => ( <GithubUser {...user} key={user.id} /> )) }
 
-        <Pagination />
+        <Pagination handlePageClick={this.handlePageClick} />
 
         <Following />
       </React.Fragment>
