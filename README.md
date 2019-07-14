@@ -1,7 +1,9 @@
 ## Description
 The main goal of this assignment is to create a small project called GithubClient. It is a single page
 application where users see a list of Github users that own repositories written in Javascript language,
-and see details about those users and their repositories. All data should be taken from the Github public API.
+and see details about those users and their repositories. All data should be taken from the Github public API. 
+
+There is a demostration recording in format.mov showing the UI of the application in action ![Demo Recording](/img/github-client_App-record.mov)
 
 ![Screenshot](/img/Screenshot%202019-07-01%20at%2008.51.11.png)
 
