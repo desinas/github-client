@@ -4,8 +4,11 @@ function Pagination(props) {
     return(
         <section className="section">
             <nav className="pagination" role="navigation" aria-label="pagination">
-            <a href="/" className="pagination-previous" title="This is the first page" disabled>Previous</a>
-            <a href="/" className="pagination-next">Next page</a>
+
+            {props.userPage>1 ? <button onClick={props.handlePrevPageClick} className="pagination-previous">Previous</button>
+                                                   : <button className="pagination-previous" title="This is the first page" disabled>Previous</button>}
+            
+            <button onClick={props.handleNextPageClick} className="pagination-next">Next page</button>
             <ul className="pagination-list">
                 <li>
                 <button id="1" onClick={props.handlePageClick} className="pagination-link" aria-label="Page 1" aria-current="page">1</button>

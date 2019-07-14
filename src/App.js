@@ -29,8 +29,10 @@ class App extends React.Component {
     */
     this.state = {
       users: [],
-      userPage: null
+      userPage: 1
     };
+    this.handleNextPageClick=this.handleNextPageClick.bind(this);
+    this.handlePrevPageClick=this.handlePrevPageClick.bind(this);
     this.handlePageClick=this.handlePageClick.bind(this);
   }
 
@@ -41,10 +43,30 @@ class App extends React.Component {
     
   }
 
+  handleNextPageClick () {
+
+    const nextPageNum=this.state.userPage + 1;
+    //async
+    this.setState({ userPage: nextPageNum });
+    //async
+    this.searchUsers( nextPageNum );
+  }
+
+  handlePrevPageClick () {
+
+    const prevPageNum=this.state.userPage - 1;
+    //async
+    this.setState({ userPage: prevPageNum });
+    //async
+    this.searchUsers( prevPageNum );
+  }
+
   handlePageClick (event) {
 
     const eveTargId=Number(event.target.id);
-    this.setState({userPage: eveTargId});
+    //async
+    this.setState({ userPage: eveTargId });
+    //async
     this.searchUsers( eveTargId );
   }
 
@@ -90,7 +112,10 @@ class App extends React.Component {
                                 'login' : user.login }) )
                                   .map(( user ) => ( <GithubUser {...user} key={user.id} /> )) }
 
-        <Pagination handlePageClick={this.handlePageClick} />
+        <Pagination userPage={this.state.userPage}
+              handleNextPageClick={this.handleNextPageClick}
+              handlePrevPageClick={this.handlePrevPageClick}
+              handlePageClick={this.handlePageClick} />
 
         <Following />
       </React.Fragment>
