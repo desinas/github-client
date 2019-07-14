@@ -28,6 +28,8 @@ class GithubUser extends React.Component {
             repoPage: 1
         };
         this.handleClick=this.handleClick.bind(this);
+        this.handleNextReposClick=this.handleNextReposClick.bind(this);
+        this.handlePrevReposClick=this.handlePrevReposClick.bind(this);
     }
 
     componentDidMount() {
@@ -36,10 +38,33 @@ class GithubUser extends React.Component {
         this.getUserRepos(this.props.login, this.state.repoPage);
     }
 
+    // shouldComponentUpdate() {}
+
+    // componentWillUnmount() {}
+
     handleClick () {
         
         this.setState( {isProfiClicked: !this.state.isProfiClicked} )
     };
+
+    handleNextReposClick () {
+        
+        const nextPageNum=this.state.repoPage + 1; 
+        //async
+        this.setState({ repoPage: nextPageNum });
+        //async
+        this.getUserRepos(this.props.login, nextPageNum);
+    }
+
+    handlePrevReposClick () {
+
+        const prevPageNum=this.state.repoPage -1;
+        //async
+        this.setState({ repoPage: prevPageNum });
+        //async
+        this.getUserRepos(this.props.login, prevPageNum);
+
+    }
 
      /**
      * @function getUserDetails use axios library in order to call the api and return a promise on resolve
@@ -67,13 +92,14 @@ class GithubUser extends React.Component {
      * and return data for repositories that associated with this github user
      * @example https://api.github.com/users/yyx990803/repos?sort=updated&type=owner&direction=%20desc&page=1&per_page=10
      */
-    getUserRepos = function (ghUser, repoPage=this.state.repoPage) {
+    getUserRepos = function (ghUser, repoPage=1) {
 
+        if (repoPage<1) {repoPage=1};
         axios.get(`${API}/users/${ghUser}/repos?sort=updated&type=owner&direction=%20desc&page=${repoPage}&per_page=${REPO_PER_PG}`)
         .then( (response) => {
             //console.log(response.data);
             this.setState({repos: response.data});
-            console.log(this.state.repos);
+            //console.log(this.state.repos);
         }).catch( (error) => {
             console.error("Error on fetching Github repos data:" + error);
             window.alert("Sorry, there is a malfunction on fetching Github user repos!");
@@ -98,7 +124,16 @@ class GithubUser extends React.Component {
                                             'stargazers_count' : repo.stargazers_count,
                                             'watchers' : repo.watchers,
                                             'forks_count' : repo.forks_count }) )
-                                            .map(( repo ) => ( <RepoTile {...repo} key={repo.id} /> )) }
+                                            .map(( repo ) => ( <RepoTile {...repo} key={repo.id} /> ))}
+
+                { this.state.isProfiClicked && 
+                    <div className="container">
+                        <nav className="pagination" role="navigation" aria-label="pagination">
+                            {this.state.repoPage>1 ? <button onClick={this.handlePrevReposClick} className="pagination-previous">Previous</button>
+                                                   : <button className="pagination-previous" title="This is the first page" disabled>Previous</button>}
+                            <button onClick={this.handleNextReposClick} className="pagination-next">Next Repos</button>
+                        </nav>
+                    </div> }
 
             </React.Fragment>
         )

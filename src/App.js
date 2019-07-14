@@ -43,8 +43,9 @@ class App extends React.Component {
 
   handlePageClick (event) {
 
-    this.setState({userPage: Number(event.target.id)});
-    this.searchUsers( Number(event.target.id) );
+    const eveTargId=Number(event.target.id);
+    this.setState({userPage: eveTargId});
+    this.searchUsers( eveTargId );
   }
 
   /**
@@ -52,13 +53,14 @@ class App extends React.Component {
  * from the Github with popularity as a base factor according the number of followers.
  * @function searchUsers use axios library in order to call the api and return a promise on resolve
  * @todo manage to chain this function with the the getUserDetails so that to have user details data ready
- * @param {number} userPage is the number for the pagination in the site, dont pass a value
+ * @param {number} userPage is the number for the pagination in the site, on missing value then passing userPage=1 for default value
  * to the function explicitly, use the setState to change page instead
  * @example https://api.github.com/search/users?q=language:javascript+type:user&sort=followers&order=desc&page=1&per_page=10
  */
-  searchUsers = function (userPage) {
-    
-    if (userPage === null) {userPage=1} //init of user page at number 1
+  searchUsers = function (userPage=1) {
+      //Default function parameters allow named parameters to be initialized with default values if no value or undefined is passed
+     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters
+    //if (userPage === undefined) {userPage=1} //when func invoked without value then init of user page at number 1
     const find = '/search/users';
     axios.get(`${API}${find}?q=language:javascript+type:user&sort=followers&order=desc&page=${userPage}&per_page=${USER_PER_PG}`)
       .then( (response) => {

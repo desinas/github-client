@@ -3,7 +3,7 @@ import React from 'react';
 function RepoTile(props) {
   //if (props.isProficlicked) {}
     return(
-      <section className="section">
+      <div className="container">
 
       <div className="tile is-ancestor">
           <div className="tile is-12">
@@ -19,7 +19,7 @@ function RepoTile(props) {
           </div>
         </div>
 
-      </section>
+      </div>
 
 
     )
