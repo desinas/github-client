@@ -3,12 +3,12 @@ The main goal of this assignment is to create a small project called GithubClien
 application where users see a list of Github users that own repositories written in Javascript language,
 and see details about those users and their repositories. All data should be taken from the Github public API. 
 
-There is a demostration recording in format.mov showing the UI of the application in action ![Demo Recording](/img/github-client_App-record.mov)
-
-![Screenshot](/img/Screenshot%202019-07-01%20at%2008.51.11.png)
+There is a demostration recording in GIF format
+showing the UI of the application in action ![Demo Recording](/img/github-client_App-record.gif)
 
 Project styling is done with a CSS preprocessor like SASS or a CSS-In-JS library like styled-components. All data could be retrieved directly from the Github public API with simple ajax calls from the client.
 
+![Screenshot](/img/Screenshot%202019-07-01%20at%2008.51.11.png)
 ![Screenshot](/img/Screenshot%202019-07-01%20at%2008.51.35.png)
 
 ## Basic level
